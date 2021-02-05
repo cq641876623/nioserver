@@ -28,10 +28,10 @@ public class GottyHandler implements Runnable {
                     if(!key.isValid()){
 
                     }
-                    if(key.isAcceptable()) {
+                    if(key.isReadable()){
 
                     }
-                    if(key.isReadable()){
+                    if(key.isWritable()){
 
                     }
                 }
