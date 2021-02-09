@@ -7,7 +7,6 @@ import com.cq.nio.server.event.ReadEvent;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -83,10 +82,8 @@ public class Gotty implements EventSource {
                 while(it.hasNext()) {
                     SelectionKey key = it.next();
                     it.remove();
-                    if(!key.isValid()||!key.channel().isOpen()){
+                    if(!key.isValid()){
                         key.cancel();
-                        System.out.println("key关闭");
-                        continue;
                     }
                     Event event=null;
                     if(key.isAcceptable()){
@@ -97,6 +94,8 @@ public class Gotty implements EventSource {
                     }
                     if(key.isReadable()){
 
+                        event=new ReadEvent(key.channel(),this);
+                        this.getEventLoopBootstarp().addEvent(event);
                     }
                     if(key.isWritable()){
 
