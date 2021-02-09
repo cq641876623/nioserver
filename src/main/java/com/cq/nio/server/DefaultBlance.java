@@ -6,6 +6,7 @@ package com.cq.nio.server;
  */
 public class DefaultBlance implements LoadBlance {
     int currentid;
+
     public DefaultBlance() {
         currentid=0;
     }
